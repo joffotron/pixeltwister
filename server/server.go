@@ -2,7 +2,6 @@ package server
 
 import (
     twister "brutalbits.com/pixeltwister/image"
-    "image/png"
     "net/http"
 )
 
@@ -13,8 +12,7 @@ func Start() {
 
 func load(response http.ResponseWriter, request *http.Request) {
     response.Header().Set("Content-Type", "image/png")
-    //func DetectContentType(data []byte) string
 
     artFile := twister.LoadImage("data/base.jpg")
-    png.Encode(response, artFile)
+    twister.EncodePng(response, artFile)
 }

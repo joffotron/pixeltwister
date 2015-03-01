@@ -1,16 +1,17 @@
 package image
 
 import (
-    "image"
-    _ "image/jpeg"
-    "os"
-    "brutalbits.com/pixeltwister/image"
+    magick "gopkgs.com/magick.v1"
+    "io"
 )
 
-func LoadImage(filename string) image.Image {
-    file, _ := os.Open(filename)
-    defer file.Close()
-
-    image, _, _ := image.Decode(file)
+func LoadImage(filename string) *magick.Image {
+    image, _ := magick.DecodeFile(filename)
     return image
+}
+
+func EncodePng(output io.Writer, image *magick.Image) {
+    info := magick.NewInfo()
+    info.SetFormat("PNG")
+    image.Encode(output, info)
 }
