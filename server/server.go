@@ -20,7 +20,6 @@ func load(response http.ResponseWriter, request *http.Request) {
 
 func thumb400(response http.ResponseWriter, request *http.Request) {
     response.Header().Set("Content-Type", "image/png")
-    image := twister.LoadImage("data/base.jpg")
-    scaled, _ := image.Scale(400, 400)
+    image := twister.LoadImage("data/base.jpg").twister.Scale(400,400)
     twister.EncodePng(response, scaled)
 }

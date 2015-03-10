@@ -1,17 +1,23 @@
+// +build gm
 package image
 
 import (
-    magick "gopkgs.com/magick.v1"
+    m "gopkgs.com/magick.v1"
     "io"
 )
 
-func LoadImage(filename string) *magick.Image {
-    image, _ := magick.DecodeFile(filename)
+func LoadImage(filename string) *m.Image {
+    image, _ := m.DecodeFile(filename)
     return image
 }
 
-func EncodePng(output io.Writer, image *magick.Image) {
-    info := magick.NewInfo()
+func EncodePng(output io.Writer, image *m.Image) {
+    info := m.NewInfo()
     info.SetFormat("PNG")
     image.Encode(output, info)
+}
+
+func Scale(image *m.Image, x integer,y integer) *m.Image {
+	scaled, _ := image.Scale(x, y)
+	return scaled
 }
