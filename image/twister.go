@@ -1,4 +1,4 @@
-// x+build gm
+// +build gm
 package image
 
 import (
@@ -25,4 +25,9 @@ func Scale(image *m.Image, x int, y int) *m.Image {
 func UnsharpMask(image *m.Image, radius float64, sigma float64, amount float64, threshold float64) *m.Image {
 	sharpened, _ := image.UnsharpMask(radius, sigma, amount, threshold)
 	return sharpened
+}
+
+func Compose(baseImage *m.Image, overlay *m.Image, x int, y int) *m.Image {
+	baseImage.Composite(m.CompositeOver, overlay, x, y)
+	return baseImage
 }
